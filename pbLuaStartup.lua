@@ -41,6 +41,12 @@ function main()
 	-- the tachometer value at which the wound was found.
 	-- The second function will take that tachometer value and go there, then 
 	-- bandage the wound.
+	
+	nxt.dofile("healer")
+
+	-- The way this is set up, it'll be trivial to test the healer file.
+	-- All that needs to be done is paste it into the lua console and the program
+	-- should run. When we want to flash it, we can do that with luaflash.lua
 --
 end
 

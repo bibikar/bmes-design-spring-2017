@@ -6,20 +6,11 @@
 -- Just paste in this entire file, and push enter. 
 -- This script will walk you through flashing the program files.
 
--- inputs: name (string), size (integer, in kilobytes)
-function luaflash_writeprogram(name, size)
-
-	
-	print("Paste the program now. When done, push Ctrl+D, or ^D")
-	print("or any other method of entering an EOF character.")
-	
-	programString = io.read("*all") -- read until EOF
-	flashprogram(name, size, programString)
-
-
-end
-
 function flashprogram(name, size, program)
+	nxt.DisplayClear()
+	nxt.DisplayText("FLASHING PROGRAM", 0, 0)
+	nxt.DisplayText("Do not shut down", 0, 16)
+	nxt.DisplayText("until complete!", 4, 24)
 	print("Opening " .. name .. " for writing...")
 	local handle
 	if nxt.FileExists(name) then
@@ -32,26 +23,37 @@ function flashprogram(name, size, program)
 	-- from the user now, and save it into the file.
 
 	print("\nWriting " .. name .. " into flash!")
-	bytes = nxt.FileWrite(handle, program)
+	local bytes = nxt.FileWrite(handle, program)
 	print(bytes .. " bytes written.")
-end
-
-
-function luaflash()
-
 	nxt.DisplayClear()
-	nxt.DisplayText("FLASHING PROGRAM", 0, 0)
-	nxt.DisplayText("Do not shut down", 0, 16)
-	nxt.DisplayText("until complete!", 4, 24)
-
-	-- The plan now is to have the program separated into two files.
-	-- 1. pbLuaStartup - executed on startup after usb console is connected
-	-- 	The startup file doesn't care about the healer file. It just loads it
-	-- 	and lets it do its thing once it's loaded up.
-	-- 2. healer - actually does all the bandaging and stuff.
-	
-	print("Welcome to the luaflash utility.")
-
-	luaflash_writeprogram("pbLuaStartup", 8) -- startup file is 8 KB
-	luaflash_writeprogram("healer", 32) -- actual healer file is 32 KB
+	nxt.DisplayText("Flash complete!")
 end
+
+function flashstartup(program)
+	flashprogram("pbLuaStartup", 8, program)
+end
+
+function flashhealer(program)
+	flashprogram("healer", 32, program)
+end
+
+function flashhelp()
+	local help = [=[To write to flash, call the function flashprogram().
+		flashprogram(name, size, program)
+		name (string) - name of file to write to
+		size (integer) - size of file to write, in KB
+		program (string) - string containing the program.
+		
+		There are also two presets:
+		flashstartup(program) - flashes pbLuaStartup as 8KB file
+		flashhealer(program) - flashes healer as 32KB file
+		
+		If you want to enter a multiline string, enclose it in 
+		double square brackets as follows:
+		multiline = [[This is a
+		multiline string!]]]=]
+	print(help)
+end
+
+flashhelp()
+

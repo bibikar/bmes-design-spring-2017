@@ -32,8 +32,11 @@ function main()
 	scrollPos = scrollPos + 8
 	nxt.DisplayText("to begin healing", 0, scrollPos)
 
+	nxt.SoundTone(800, 100, 2)
+
 	-- wait until some button is pressed:
 	repeat until nxt.ButtonRead() ~= 0
+	nxt.SoundTone(1066, 100, 2)
 
 	-- Now we actually load the programs and execute them.
 	-- In order to do this, we will have to figure out the return values/inputs.

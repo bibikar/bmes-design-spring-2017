@@ -11,6 +11,17 @@ function flashprogram(name, size, program)
 	nxt.DisplayText("FLASHING PROGRAM", 0, 0)
 	nxt.DisplayText("Do not shut down", 0, 16)
 	nxt.DisplayText("until complete!", 4, 24)
+	
+	-- Make some sort of warning sound
+	nxt.SoundTone(800,0,1)
+	nxt.SoundTone(800,100,1)
+	repeat until nxt.SoundGetStatus() ~= 0
+	nxt.SoundTone(400,100,1)
+	repeat until nxt.SoundGetStatus() ~= 0
+	nxt.SoundTone(800,100,1)
+	repeat until nxt.SoundGetStatus() ~= 0
+	nxt.SoundTone(400,100,1)
+
 	print("Opening " .. name .. " for writing...")
 	local handle
 	if nxt.FileExists(name) then
@@ -27,6 +38,16 @@ function flashprogram(name, size, program)
 	print(bytes .. " bytes written.")
 	nxt.DisplayClear()
 	nxt.DisplayText("Flash complete!")
+
+	-- make some sort of flash complete sound:
+	nxt.SoundTone(800,0,1)
+	nxt.SoundTone(800,100,1)
+	repeat until nxt.SoundGetStatus() ~= 0
+	nxt.SoundTone(400,100,1)
+	repeat until nxt.SoundGetStatus() ~= 0
+	nxt.SoundTone(800,100,1)
+	repeat until nxt.SoundGetStatus() ~= 0
+	nxt.SoundTone(1066,100,1)
 end
 
 function flashstartup(program)

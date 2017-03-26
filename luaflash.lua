@@ -35,6 +35,7 @@ function flashprogram(name, size, program)
 
 	print("\nWriting " .. name .. " into flash!")
 	local bytes = nxt.FileWrite(handle, program)
+	nxt.FileClose(handle)
 	print(bytes .. " bytes written.")
 	nxt.DisplayClear()
 	nxt.DisplayText("Flash complete!")

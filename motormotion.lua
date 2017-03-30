@@ -27,13 +27,7 @@ function motormotion()
 		if (tachon ~= tacho) or fl then
 			fl = false
 			tacho = tachon
-			nxt.DisplayClear()
-			nxt.DisplayText("Manual adjust",0,0)
-			nxt.DisplayText("mode. Push the",0,8)
-			nxt.DisplayText("grey square to",0,16)
-			nxt.DisplayText("exit.",0,24)
-			nxt.DisplayText("Tacho: " .. tachon,0,32)
-			nxt.DisplayText("Moving port " .. port)	
+			displaytacho(port)
 		end
 		while nxt.ButtonRead() == 2 do
 			nxt.OutputSetSpeed(port,32,100)

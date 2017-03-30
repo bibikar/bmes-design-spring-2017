@@ -58,6 +58,10 @@ function main()
 			nxt.PowerDown()
 			return
 		end
+		if btnStatus == 2 or btnStatus == 4 then
+			nxt.dofile("adjust")
+			motormotion()
+		end
 	until btnStatus ~= 0
 	nxt.SoundTone(1200, 0, 0)
 	nxt.SoundTone(1200, 100, 2)
@@ -81,6 +85,8 @@ function main()
 		nxt.DisplayText("Lua console]", 3, 56)
 		nxt.SoundTone(900*5/6, 0, 0)
 		nxt.SoundTone(900*5/6, 100, 2)
+		repeat until nxt.ButtonRead() == 0
+		repeat until nxt.ButtonRead() ~= 0
 		return
 	end
 	

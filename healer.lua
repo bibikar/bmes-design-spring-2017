@@ -8,6 +8,9 @@ LATERAL_MOTOR = 1
 -- Direction definitions - set to +1 or -1 depending on which direction everything is oriented.
 -- If something is always going backwards, switch this.
 LATERAL_MOTOR_DIR = 1
+RING_MOTOR_DIR = 1
+
+
 
 -- Distance definitions
 -- The total distance the lateral motor should move to move across the entire arm
@@ -75,8 +78,13 @@ function heal()
 	-- Reinsert connector into wrapping module
 	-- Return to highest position of the arm
 	-- Return to the end of the wound closest to current position
+	--
 	-- Make wrap while shifting over slightly to the other side of the wound
 	-- 3 wraps over 8-10cm of wound
+	-- Now we will assume that we are at the pin holder
+	--
+	
+
 	-- Here, we also do the push thing to secure the bandage?
 end
 
